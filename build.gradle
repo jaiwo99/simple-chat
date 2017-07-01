@@ -1,0 +1,18 @@
+allprojects {
+	group = 'com.jaiwo99.demo'
+	version = '1.0-SNAPSHOT'
+
+	apply plugin: 'idea'
+}
+
+subprojects {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		maven { url "http://repo.maven.apache.org/maven2" }
+	}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.12'
+}
