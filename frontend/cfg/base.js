@@ -22,6 +22,10 @@ module.exports = {
   devServer: {
     contentBase: './src/',
     historyApiFallback: true,
+    proxy: {
+      "/api/*" : "http://localhost:" + defaultSettings.backendPort,
+      "/apiws/*" : "http://localhost:" + defaultSettings.backendPort
+    },
     hot: true,
     port: defaultSettings.port,
     publicPath: defaultSettings.publicPath,
@@ -30,10 +34,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      actions: `${defaultSettings.srcPath}/actions/`,
       components: `${defaultSettings.srcPath}/components/`,
-      sources: `${defaultSettings.srcPath}/sources/`,
-      stores: `${defaultSettings.srcPath}/stores/`,
       styles: `${defaultSettings.srcPath}/styles/`,
       config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
     }
