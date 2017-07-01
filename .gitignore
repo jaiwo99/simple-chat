@@ -2,3 +2,7 @@
 .idea
 .gradle
 build/
+
+node_modules
+
+dist
