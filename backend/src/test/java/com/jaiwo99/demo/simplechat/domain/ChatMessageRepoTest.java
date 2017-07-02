@@ -46,6 +46,12 @@ public class ChatMessageRepoTest {
     }
 
     @Test
+    public void add_should_return_message() {
+        assertThat(repo.add(msg1).isPresent()).isTrue();
+        assertThat(repo.add(msg1).isPresent()).isFalse();
+    }
+
+    @Test
     public void fetch_should_fetch_messages_sorted() {
         repo.add(msg3);
         repo.add(msg1);

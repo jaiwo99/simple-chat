@@ -2,6 +2,7 @@ package com.jaiwo99.demo.simplechat.web;
 
 import com.jaiwo99.demo.simplechat.domain.ChatMessageRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 public class MessageRestController {
 
     private final ChatMessageRepo repo;
+    private final SimpMessagingTemplate template;
 
     @GetMapping
     public MessageResponse getMessages() {
@@ -24,6 +26,7 @@ public class MessageRestController {
 
     @PostMapping
     public void addMessage(@Valid @RequestBody SendMessageRequest message) {
-        repo.add(message.toChatMessage());
+        repo.add(message.toChatMessage())
+                .ifPresent(msg -> template.convertAndSend("/topic/chat", new MessageDTO(msg)));
     }
 }

@@ -36,6 +36,7 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-websocket')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 

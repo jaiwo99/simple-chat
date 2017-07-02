@@ -13,6 +13,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -60,5 +63,16 @@ public class MessageRestControllerIT extends AbstractIT {
         assertThat(result).hasSize(3);
         assertThat(result.get(2).getAuthor()).isEqualTo(messageRequest.getAuthor());
         assertThat(result.get(2).getMessage()).isEqualTo(messageRequest.getMessage());
+    }
+
+    @Test
+    public void addMessages_should_notify_client() throws Exception {
+        final SendMessageRequest messageRequest = new SendMessageRequest("test", "123");
+        mockMvc.perform(post("/api/messages")
+                .header("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(jsonString(messageRequest))
+        ).andExpect(status().is(200));
+
+        verify(simpMessagingTemplate).convertAndSend(anyString(), any(Object.class));
     }
 }
