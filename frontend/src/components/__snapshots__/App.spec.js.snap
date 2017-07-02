@@ -2,21 +2,52 @@
 
 exports[`App Component should render login component 1`] = `
 <div
-  className="login"
+  className="container"
 >
-  <form
-    onSubmit={[Function]}
+  <h1
+    className="jumbotron"
   >
-    <input
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-    <button
-      type="submit"
+    Simple Chat
+  </h1>
+  <div
+    className="login"
+  >
+    <h3>
+      Please enter your name here:
+    </h3>
+    <form
+      className="form-inline"
+      onSubmit={[Function]}
     >
-      Enter
-    </button>
-  </form>
+      <div
+        className="form-group"
+      >
+        <label
+          className="sr-only"
+          htmlFor="author"
+        >
+          Enter your name here: 
+        </label>
+        <input
+          className="form-control"
+          id="author"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+      </div>
+        
+      <div
+        className="form-group"
+      >
+        <button
+          className="btn btn-primary"
+          type="submit"
+        >
+          Enter
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 `;

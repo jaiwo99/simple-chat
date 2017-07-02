@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class Login extends React.Component {
 
@@ -14,11 +14,21 @@ export default class Login extends React.Component {
   }
 
   render() {
-    return (<div className="login">
-        <form onSubmit={this.login.bind(this)}>
-          <input type="text" value={this.state.author} onChange={this.handleChange.bind(this)}/>
-          <button type="submit">Enter</button>
-        </form>
+    return (<div className="container">
+        <h1 className="jumbotron">Simple Chat</h1>
+        <div className="login">
+          <h3>Please enter your name here:</h3>
+          <form onSubmit={this.login.bind(this)} className="form-inline">
+            <div className="form-group">
+              <label className="sr-only" htmlFor="author">Enter your name here: </label>
+              <input id="author" className="form-control" type="text" value={this.state.author} onChange={this.handleChange.bind(this)}/>
+            </div>
+            &nbsp;&nbsp;
+            <div className="form-group">
+              <button className="btn btn-primary" type="submit">Enter</button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

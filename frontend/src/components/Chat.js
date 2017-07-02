@@ -69,8 +69,10 @@ export default class Chat extends React.Component {
           throw error;
         }
       })
-      .then(() => {})
-      .then(() => {})
+      .then(() => {
+      })
+      .then(() => {
+      })
       .catch((error) => {
         console.error('Failed post message:', error)
       });
@@ -102,23 +104,36 @@ export default class Chat extends React.Component {
   render() {
     let chatlogs = this.state.chatlogs.map((item, i) => {
       return (
-        <li key={i}>
-          <div>{item.createdDate}</div>
-          <div>{item.author}</div>
-          <div>{item.message}</div>
+        <li key={i} className={item.author === this.author ? 'list-group-item-success': 'list-group-item-warning'}>
+          <div>
+            <span className="label label-primary ">{item.author}</span>
+            &nbsp;
+            <span className="label label-default">{item.createdDate}</span>
+          </div>
+          <div>
+            <div>
+              <h4>
+                {item.message}
+              </h4>
+            </div>
+          </div>
         </li>);
     });
 
-    return (<div className="container chat">
-      <div className="row chatlog">
-        <ul>
-          {chatlogs}
-        </ul>
+    return (<div className="chat_window">
+      <div className="top_menu chat_head">
+        <div className="title"> Simple Chat</div>
       </div>
-      <div className="row chatinput">
-        <form className="form" onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" value={this.state.message} onChange={this.handleChange.bind(this)}/>
-          <button type="submit">Send</button>
+      <ul className="messages list-group chat_body"> {chatlogs}</ul>
+      <div className="bottom_wrapper clearfix chat_foot">
+        <form className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
+          <div className="input-group input-group-lg col-lg-10 col-md-10 col-sm-10">
+            <input className="form-control" type="text" value={this.state.message} onChange={this.handleChange.bind(this)}/>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <div className="input-group input-group-lg col-lg-1 col-md-1 col-sm-1">
+            <button className="btn btn-primary btn-lg" type="submit">Send</button>
+          </div>
         </form>
       </div>
     </div>);

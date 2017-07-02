@@ -20,7 +20,7 @@ describe('Login Component', () => {
 
     expect(localStorage.getItem('CHAT_AUTHOR')).toBeNull();
 
-    tree.children[0].children[0].props.onChange({
+    tree.children[1].children[1].children[0].children[1].props.onChange({
       target: {
         value: 'max'
       },
@@ -28,7 +28,7 @@ describe('Login Component', () => {
       }
     });
 
-    tree.children[0].props.onSubmit({
+    tree.children[1].children[1].props.onSubmit({
       preventDefault: () => {
       }
     });

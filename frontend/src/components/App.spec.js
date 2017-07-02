@@ -13,7 +13,7 @@ describe('App Component', () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
 
-    expect(tree.props.className).toBe('login');
+    expect(tree.children[1].props.className).toBe('login');
 
   });
 
