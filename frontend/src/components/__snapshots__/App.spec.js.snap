@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component should render login component 1`] = `
+<div
+  className="login"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <button
+      type="submit"
+    >
+      Enter
+    </button>
+  </form>
+</div>
+`;
