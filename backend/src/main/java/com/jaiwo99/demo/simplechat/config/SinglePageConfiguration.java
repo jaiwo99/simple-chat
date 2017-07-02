@@ -13,6 +13,9 @@ public class SinglePageConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/assets/**")
+                .addResourceLocations("classpath:/public/assets/");
+
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/public/index.html")
                 .resourceChain(true)
