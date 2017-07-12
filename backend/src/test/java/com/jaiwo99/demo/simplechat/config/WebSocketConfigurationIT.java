@@ -3,6 +3,7 @@ package com.jaiwo99.demo.simplechat.config;
 import com.jaiwo99.demo.simplechat.AbstractIT;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
@@ -25,6 +26,9 @@ public class WebSocketConfigurationIT extends AbstractIT {
     private BlockingQueue<String> blockingQueue;
     private WebSocketStompClient stompClient;
 
+    @LocalServerPort
+    int port;
+
     @Before
     public void setup() {
         blockingQueue = new LinkedBlockingDeque<>();
@@ -35,7 +39,7 @@ public class WebSocketConfigurationIT extends AbstractIT {
     @Test
     public void message_can_be_received_from_server() throws Exception {
         final StompSession session = stompClient
-                .connect("ws://localhost:8080/apiws/chat", new StompSessionHandlerAdapter() {
+                .connect("ws://localhost:"+String.valueOf(port)+"/apiws/chat", new StompSessionHandlerAdapter() {
                 })
                 .get(1, SECONDS);
         session.subscribe("/topic/chat", new DefaultStompFrameHandler());
