@@ -2,6 +2,7 @@ package com.jaiwo99.demo.simplechat.config;
 
 import com.jaiwo99.demo.simplechat.AbstractIT;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
@@ -21,6 +22,7 @@ import static java.util.Collections.singletonList;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class WebSocketConfigurationIT extends AbstractIT {
 
     private BlockingQueue<String> blockingQueue;
