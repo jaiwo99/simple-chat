@@ -117,13 +117,9 @@ export default class Event extends React.Component {
         return null;
       }
       return (
-        <li key={i} className='list-group-item-success clickableStyle' onClick={() => this.sendMessageToInterest(item)}>
+        <li key={i} className='clickableStyle' onClick={() => this.sendMessageToInterest(item)}>
           <div>
-            <span>{item.name}</span>
-            &nbsp;
-            <span>{item.city}</span>
-            &nbsp;
-            <span>{item.createdDate}</span>
+            <span><i className="icon glyphicon glyphicon-user"/> <strong>{item.name}</strong> from <strong>{item.city}</strong> wants to meet</span>
           </div>
         </li>);
     });
