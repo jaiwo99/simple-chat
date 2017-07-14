@@ -10,6 +10,7 @@ export default class Chat extends React.Component {
     super(props);
 
     this.author = this.props.author;
+    this.chatService = this.props.chatService;
 
     this.state = {
       message: '',
@@ -49,33 +50,7 @@ export default class Chat extends React.Component {
   }
 
   submitMessage(message) {
-    fetch('/api/messages', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        author: this.author,
-        message: message
-      })
-    })
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          return response;
-        } else {
-          let error = new Error(response.statusText);
-          error.response = response;
-          throw error;
-        }
-      })
-      .then(() => {
-      })
-      .then(() => {
-      })
-      .catch((error) => {
-        console.error('Failed post message:', error)
-      });
+    this.chatService.sendMessage(message, this.author)
   }
 
   handleSubmit(e) {
@@ -104,7 +79,7 @@ export default class Chat extends React.Component {
   render() {
     let chatlogs = this.state.chatlogs.map((item, i) => {
       return (
-        <li key={i} className={item.author === this.author ? 'list-group-item-success': 'list-group-item-warning'}>
+        <li key={i} className={item.author === this.author ? 'list-group-item-success' : 'list-group-item-warning'}>
           <div>
             <span className="label label-primary ">{item.author}</span>
             &nbsp;
@@ -120,22 +95,24 @@ export default class Chat extends React.Component {
         </li>);
     });
 
-    return (<div className="chat_window">
-      <div className="top_menu chat_head">
-        <div className="title"> Simple Chat</div>
+    return (
+      <div className="chat_window">
+        <div className="top_menu chat_head">
+          <div className="title"> Simple Chat</div>
+        </div>
+        <ul className="messages list-group chat_body"> {chatlogs}</ul>
+        <div className="bottom_wrapper clearfix chat_foot">
+          <form className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
+            <div className="input-group input-group-lg col-lg-10 col-md-10 col-sm-10">
+              <input className="form-control" type="text" value={this.state.message} onChange={this.handleChange.bind(this)}/>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <div className="input-group input-group-lg col-lg-1 col-md-1 col-sm-1">
+              <button className="btn btn-primary btn-lg" type="submit">Send</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <ul className="messages list-group chat_body"> {chatlogs}</ul>
-      <div className="bottom_wrapper clearfix chat_foot">
-        <form className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
-          <div className="input-group input-group-lg col-lg-10 col-md-10 col-sm-10">
-            <input className="form-control" type="text" value={this.state.message} onChange={this.handleChange.bind(this)}/>
-          </div>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <div className="input-group input-group-lg col-lg-1 col-md-1 col-sm-1">
-            <button className="btn btn-primary btn-lg" type="submit">Send</button>
-          </div>
-        </form>
-      </div>
-    </div>);
+    );
   }
 }

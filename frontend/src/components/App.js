@@ -7,6 +7,8 @@ import Store from '../services/LocalStorage';
 
 import Login from './Login';
 import Chat from './Chat';
+import Event from './Event';
+import ChatService from './Chat.serivce';
 
 export default class App extends React.Component {
 
@@ -14,6 +16,7 @@ export default class App extends React.Component {
     super(props);
 
     this.store = new Store();
+    this.chatService = new ChatService();
     this.state = {};
   }
 
@@ -37,7 +40,12 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.showChat) {
-      return (<Chat author={this.author}/>)
+      return (
+        <div className="wrapper">
+          <Chat author={this.author} chatService={this.chatService}/>
+          <Event author={this.author} chatService={this.chatService}/>
+        </div>
+      )
     } else {
       return (<Login store={this.store} reloadFn={this.reload.bind(this)}/>)
     }

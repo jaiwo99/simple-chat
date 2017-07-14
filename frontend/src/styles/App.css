@@ -198,3 +198,7 @@ body {
   display: inline-block;
   line-height: 48px;
 }
+
+.clickableStyle {
+  cursor: pointer;
+}
