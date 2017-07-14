@@ -36,7 +36,10 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-websocket')
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+	compile group: "de.flapdoodle.embed", name: "de.flapdoodle.embed.mongo", version: "2.0.0"
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
